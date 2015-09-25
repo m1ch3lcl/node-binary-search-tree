@@ -46,7 +46,7 @@ bst.delete(15);   // bst.search(15) will now give []
 bst.delete(18, 'world');   // bst.search(18) will now give ['hello']
 ```
 
-There are three optional parameters you can pass the BST constructor, allowing you to enforce a key-uniqueness constraint, use a custom function to compare keys and use a custom function to check whether values are equal. These parameters are all passed in an object.
+There are four optional parameters you can pass the BST constructor, allowing you to enforce a key-uniqueness constraint, use a custom function to compare keys and use a custom function to check whether values are equal. These parameters are all passed in an object.
 
 ### Uniqueness
 
@@ -96,6 +96,26 @@ bst.delete(10, 'abcde');
 bst.search(10);   // Returns ['howdoyoudo']
 ```
 
+### Tracking changes in the tree
+
+ONLY IMPLEMENTED WITH AVL !
+
+```javascript
+// Each time a node's parent changes, the provided function will be called
+var avl = new AVLTree({ notifyChanges: function(child, parent) {
+  console.log(parent.key+' is now parent of '+child.key);
+});
+
+// it works during insertions...
+avl.insert(15, 'some data for key 15');
+avl.insert(12, 'something else');
+avl.insert(18, 'hello');
+
+
+// and deletions
+avl.delete(15);
+avl.delete(18, 'world');
+```
 
 ## License 
 
